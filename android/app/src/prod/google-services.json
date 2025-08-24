@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "860051153873",
+    "project_id": "klever-24d61",
+    "storage_bucket": "klever-24d61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860051153873:android:a8196cf24a7072614976f0",
+        "android_client_info": {
+          "package_name": "com.klever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860051153873-8vil1u1rh67a39rpptepdp7sjueg8i5v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klever",
+            "certificate_hash": "995acae42cb7936918f7aaeaa97e066ecda248bd"
+          }
+        },
+        {
+          "client_id": "860051153873-jcb5fppakd23890jh206ttrvvj8k1bsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klever",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "860051153873-kovjsnuts8ftu2bpqbb6n6h8i6kqqt8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjiIfsu56dkZRYDtormiu7tAu-4e71_TQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860051153873-kovjsnuts8ftu2bpqbb6n6h8i6kqqt8q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "860051153873-6e03erqndouk603sbus6rtvehr76vg5m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.klever"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
