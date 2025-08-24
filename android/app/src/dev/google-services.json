@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "342329276768",
+    "project_id": "klever-dev-959e2",
+    "storage_bucket": "klever-dev-959e2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342329276768:android:750cac03c855e781c50605",
+        "android_client_info": {
+          "package_name": "com.kleverapp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342329276768-h8jfftnlor7b8ftkbptdhk7gr94jjt50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kleverapp.dev",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "342329276768-8msi4edqeu1bn8nfvt38osfciiuu5k5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeDh3rAJ17nPoBYBdFdzLLMbz0jRwcI80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342329276768-8msi4edqeu1bn8nfvt38osfciiuu5k5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
