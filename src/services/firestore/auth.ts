@@ -1,37 +1,32 @@
 import { t } from 'i18next';
 import Toast from 'react-native-toast-message';
-import auth, {
-  GoogleAuthProvider,
+import {
   getAuth,
+  GoogleAuthProvider,
   signInWithCredential,
-  FirebaseAuthTypes,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
 } from '@react-native-firebase/auth';
 import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import type { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 export const AuthWithGoogle = async () => {
   try {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({
-      showPlayServicesUpdateDialog: true,
-    });
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
 
     const signInResult = await GoogleSignin.signIn();
-    console.log({ signInResult });
-    let idToken = signInResult.data?.idToken;
-    if (!idToken) {
-      throw new Error('No ID token found');
-    }
+    const idToken = signInResult.data?.idToken;
+    if (!idToken) throw new Error('No ID token found');
 
-    // Sign-in the user with the credential
-    const googleCredential = GoogleAuthProvider.credential(
-      signInResult.data?.idToken,
-    );
-    return signInWithCredential(getAuth(), googleCredential);
+    const googleCredential = GoogleAuthProvider.credential(idToken);
+    return await signInWithCredential(getAuth(), googleCredential);
   } catch (error: any) {
-    console.log(error);
     const data = {
       [statusCodes.SIGN_IN_CANCELLED]: {
         title: 'Error',
@@ -64,39 +59,41 @@ export const AuthWithGoogle = async () => {
 };
 
 export const AuthWithCredentials = async (
-  credentials: any,
+  credentials: { email: string; password: string },
   register: boolean,
 ) => {
+  const auth = getAuth();
   try {
     if (register) {
-      const userCredentials = await auth().createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
         credentials.email,
         credentials.password,
       );
-      await userCredentials.user.sendEmailVerification();
-      return userCredentials;
+      await userCredential.user.sendEmailVerification();
+      return userCredential;
     } else {
-      const userCredentials = await auth().signInWithEmailAndPassword(
+      return await signInWithEmailAndPassword(
+        auth,
         credentials.email,
         credentials.password,
       );
-      return userCredentials;
     }
   } catch (error: any) {
-    const code = error.code;
     Toast.show({
       text1: 'Error',
-      text2: t([`toast.auth.email.${code}`, 'toast.auth.email.DEFAULT']),
+      text2: t([`toast.auth.email.${error.code}`, 'toast.auth.email.DEFAULT']),
       type: 'error',
     });
   }
 };
 
 export const AuthLogOut = async () => {
-  const user = auth().currentUser;
-  // Show popup or not before init new login
-  if (user?.displayName) GoogleSignin.revokeAccess();
-  return await auth().signOut();
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user?.displayName) await GoogleSignin.revokeAccess();
+  return signOut(auth);
 };
 
 interface CredentialsProps {
@@ -108,29 +105,19 @@ export const VerifyCredentials = (credentials: CredentialsProps): boolean => {
   const { password, confirm } = credentials;
   const minLength = 8;
 
-  // Password validation rules
   const validationRules = {
     minLength: password.length >= minLength,
-    // hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-    // hasNumber: /\d/.test(password),
-    // hasLowerCase: /[a-z]/.test(password),
-    // hasUpperCase: /[A-Z]/.test(password),
     confirmPassword: password === confirm,
   };
 
-  // Find the failed rule and return corresponding error code
   const failedRule = Object.entries(validationRules).find(
-    ([rule, passed]) => !passed,
+    ([, passed]) => !passed,
   );
 
   if (failedRule) {
-    const [ruleName, _] = failedRule;
-    const errorCodes: any = {
+    const [ruleName] = failedRule;
+    const errorCodes: Record<string, string> = {
       minLength: 'PASSWORD_TOO_SHORT',
-      // hasSpecialChar: 'PASSWORD_NO_SPECIAL_CHAR',
-      // hasNumber: 'PASSWORD_NO_NUMBER',
-      // hasLowerCase: 'PASSWORD_NO_LOWER_CASE',
-      // hasUpperCase: 'PASSWORD_NO_UPPER_CASE',
       confirmPassword: 'PASSWORDS_DO_NOT_MATCH',
     };
     const code = errorCodes[ruleName];
@@ -147,34 +134,24 @@ export const VerifyCredentials = (credentials: CredentialsProps): boolean => {
   return true;
 };
 
-interface RemoveCredentialsProps {
-  success: boolean;
-  id?: string;
-  error?: any;
-}
 export const ReauthenticateUser = async (
   user: FirebaseAuthTypes.User,
   provider: string,
   password: string,
 ): Promise<{ success: boolean; provider?: string; error?: any }> => {
-  const email = user.email!;
-
   try {
     if (provider === 'google.com') {
-      const signInResult = await GoogleSignin.signIn();
-      let idToken = signInResult.data?.idToken;
-      if (!idToken) {
-        throw new Error('No ID token found');
-      }
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
+      const { data } = await GoogleSignin.signIn();
+      if (!data?.idToken) throw new Error('No ID token found');
 
-      // Sign-in the user with the credential
-      const googleCredential = GoogleAuthProvider.credential(
-        signInResult.data?.idToken,
-      );
-      await user.reauthenticateWithCredential(googleCredential);
+      const googleCredential = GoogleAuthProvider.credential(data.idToken);
+      await reauthenticateWithCredential(user, googleCredential);
     } else {
-      const credential = auth.EmailAuthProvider.credential(email, password);
-      await user.reauthenticateWithCredential(credential);
+      const credential = EmailAuthProvider.credential(user.email!, password);
+      await reauthenticateWithCredential(user, credential);
     }
     return { success: true, provider };
   } catch (error) {
