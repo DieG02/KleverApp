@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { TextInput, TouchableOpacity, View, Text } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import Voice, {
   SpeechErrorEvent,
-  SpeechRecognizedEvent,
   SpeechResultsEvent,
 } from '@react-native-voice/voice';
 import {
@@ -104,7 +103,8 @@ export default function TextInputCollection({
       <TouchableOpacity
         style={styles.button}
         onPress={_addNewItem}
-        disabled={!voice.results[0]?.trim()}>
+        disabled={!voice.results[0]?.trim()}
+      >
         <PlusIcon color={styles.icon.color} />
       </TouchableOpacity>
     );
@@ -149,7 +149,7 @@ export default function TextInputCollection({
           onChangeText={text =>
             setVoice((prevState: any) => ({ ...prevState, results: [text] }))
           }
-          placeholderTextColor='#858585'
+          placeholderTextColor="#858585"
         />
         {voice.recording ? (
           <StopRecordButton />

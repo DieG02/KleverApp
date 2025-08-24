@@ -68,6 +68,10 @@
           "message": "An item has been deleted from checklist"
         }
       }
+    },
+    "app": {
+      "board_error": "Could not create board",
+      "account_error": "Failed to delete account. Please try again"
     }
   },
 
@@ -97,6 +101,7 @@
       "label": "Add new collections in the section below!"
     },
     "new_item": "Create new collection here...",
+    "board_completed": "Completed!",
 
     "summary": {
       "0": {

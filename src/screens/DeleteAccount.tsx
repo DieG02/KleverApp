@@ -80,7 +80,7 @@ export default function DeleteAccount({
       console.error('Error deleting account:', error);
       Toast.show({
         text1: 'Error',
-        text2: 'Failed to delete account. Please try again.',
+        text2: t('toast.app.account_error'),
         type: 'error',
       });
     }
