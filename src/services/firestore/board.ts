@@ -42,17 +42,17 @@ export const getBoards = async (): Promise<BoardModel[]> => {
 /* ------------------------------------------------------------------ */
 /* 2. Add a new board                                                 */
 /* ------------------------------------------------------------------ */
-export const addBoard = (board: Partial<BoardModel>): string => {
+export const addBoard = async (board: Partial<BoardModel>): Promise<string> => {
   const auth = getAuth();
-  const user_id = auth.currentUser!.uid;
+  const userId = auth.currentUser!.uid;
 
   const db = getFirestore();
-  const boardRef = doc(collection(db, 'boards')); // auto-ID
-  const board_id = boardRef.id;
+  const boardRef = doc(collection(db, 'boards'));
+  const boardId = boardRef.id;
 
   const boardData: BoardModel = {
-    user_id,
-    id: board_id,
+    user_id: userId,
+    id: boardId,
     title: board.title!,
     description: board.description || '',
     category: board.category || '',
@@ -62,8 +62,8 @@ export const addBoard = (board: Partial<BoardModel>): string => {
     updated_at: serverTimestamp(),
   };
 
-  setDoc(boardRef, boardData);
-  return board_id;
+  await setDoc(boardRef, boardData); // <- wait for the write
+  return boardId;
 };
 
 /* ------------------------------------------------------------------ */
