@@ -13,10 +13,12 @@ import { AppNavigationProps } from '../types/navigation';
 import { BoardModel } from '../types/models';
 import { Colors } from '../styles/global';
 import { removeBoard } from '../services/firestore/board';
+import { useTranslation } from 'react-i18next';
 
 export default function Card({ item }: { item: BoardModel }) {
   const { id, title, current, total } = item;
   const navigation = useNavigation<AppNavigationProps>();
+  const { t } = useTranslation();
 
   const onRedirect = () => {
     navigation.navigate('Collection', { id, title });
@@ -31,10 +33,6 @@ export default function Card({ item }: { item: BoardModel }) {
 
   const handleDelete = () => {
     removeBoard(item.id);
-  };
-
-  const handleEdit = () => {
-    // console.log({ card: item.title });
   };
 
   const RightSideActions = (progress: any, dragX: any) => {
@@ -113,7 +111,7 @@ export default function Card({ item }: { item: BoardModel }) {
             type="Medium"
             color={completed ? 'White' : 'Label'}
           >
-            {completed ? 'Completed!' : `${current}/${total}`}
+            {completed ? t('home.board_completed') : `${current}/${total}`}
           </Heading>
         </View>
 

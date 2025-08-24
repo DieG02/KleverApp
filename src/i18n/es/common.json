@@ -68,6 +68,10 @@
           "message": "Se ha eliminado un artículo de la colección"
         }
       }
+    },
+    "app": {
+      "board_error": "No se pudo crear el tablero",
+      "account_error": "No se ha podido eliminar la cuenta. Inténtalo de nuevo"
     }
   },
 
@@ -97,6 +101,7 @@
       "label": "¡Agrega nuevas colecciones en la sección de abajo!"
     },
     "new_item": "Crea una nueva colleción aquí...",
+    "board_completed": "¡Completo!",
 
     "summary": {
       "0": {
