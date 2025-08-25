@@ -1,0 +1,181 @@
+{
+  "app": {
+    "name": "Klever",
+    "settings": "Configuraciones"
+  },
+  "forms": {
+    "auth": {
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "Ingresa tu correo electrónico"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "Ingresa tu contraseña"
+      },
+      "confirm": {
+        "label": "Confirmar contraseña",
+        "placeholder": "Confirma tu contraseña"
+      }
+    }
+  },
+  "modals": {
+    "locale": {
+      "label": "Seleccionar idioma",
+      "options": {
+        "en": "Inglés",
+        "es": "Español"
+      }
+    }
+  },
+  "toast": {
+    "auth": {
+      "password": {
+        "PASSWORD_TOO_SHORT": "La contraseña debe contener al menos 8 caracteres",
+        "PASSWORDS_DO_NOT_MATCH": "Las contraseñas ingresadas no coinciden",
+        "UNKNOWN_ERROR": "Algo salió mal"
+      },
+      "email": {
+        "auth/email-already-in-use": "La dirección de correo electrónico ya está en uso",
+        "auth/invalid-email": "La dirección de correo electrónico es inválida",
+        "auth/invalid-credential": "Credenciales inválidas, por favor inténtalo de nuevo",
+        "auth/network-request-failed": "Por favor, verifica tu conexión de red",
+        "DEFAULT": "Algo salió mal"
+      },
+      "google": {
+        "SIGN_IN_CANCELLED": "El proceso de inicio de sesión fue cancelado",
+        "IN_PROGRESS": "Otro proceso en curso",
+        "PLAY_SERVICES_NOT_AVAILABLE": "Servicios de Google Play no disponibles",
+        "DEFAULT": "Algo salió mal, verifica tu conexión de red"
+      }
+    },
+    "user": {
+      "locale": {
+        "update": {
+          "title": "Éxito",
+          "message": "Se ha actualizado el idioma de la aplicación"
+        }
+      },
+      "board": {
+        "delete": {
+          "title": "Éxito",
+          "message": "Se ha eliminado un tablero"
+        }
+      },
+      "collection": {
+        "delete": {
+          "title": "Éxito",
+          "message": "Se ha eliminado un artículo de la colección"
+        }
+      }
+    },
+    "app": {
+      "board_error": "No se pudo crear el tablero",
+      "account_error": "No se ha podido eliminar la cuenta. Inténtalo de nuevo"
+    }
+  },
+
+  "sign_in": {
+    "header": "Inicia sesión en ",
+    "action": "Iniciar sesión",
+    "google": "Continuar con Google",
+    "redirect": {
+      "label": "¿No tienes una cuenta? ",
+      "to": "Regístrate"
+    }
+  },  
+  "sign_up": {
+    "header": "Regístrate en ",
+    "action": "Registrarse",
+    "redirect": {
+      "label": "¿Ya tienes una cuenta? ",
+      "to": "Iniciar sesión"
+    }
+  },
+
+  "home": {
+    "grettings": "Hola ",
+    "boards": "Colecciones",
+    "empty": {
+      "title": "Hmm, parece que está vacío",
+      "label": "¡Agrega nuevas colecciones en la sección de abajo!"
+    },
+    "new_item": "Crea una nueva colleción aquí...",
+    "board_completed": "¡Completo!",
+
+    "summary": {
+      "0": {
+        "title": "¡Comencemos!",
+        "message": "¡Has comenzado por buen camino! Empieza a completar tus listas y observa cómo crece tu progreso."
+      },
+      "15": {
+        "title": "¡Sigue avanzando!",
+        "message": "Has completado el {{percent}} de tus listas. ¡Mantén el impulso y sigue marcando tareas!"
+      },
+      "30": {
+        "title": "¡Ya vamos a la mitad!",
+        "message": "Has alcanzado el {{percent}} de tus listas. Estás haciendo un progreso constante, ¡sigue así!"
+      },
+      "50": {
+        "title": "¡Punto intermedio!",
+        "message": "¡Felicidades! Has completado el {{percent}} de tus listas. Estás a medio camino, ¡sigue adelante!"
+      },
+      "75": {
+        "title": "¡Casi terminado!",
+        "message": "¡Fantástico trabajo! Has completado el {{percent}} de tus listas. Estás casi en la línea de meta, ¡sigue adelante con fuerza!"
+      },
+      "90": {
+        "title": "¡Último esfuerzo!",
+        "message": "¡Ya casi estás ahí! Con el {{percent}} de tus listas completadas, la línea de meta está a la vista. ¡Sigue con el gran trabajo!"
+      },
+      "100": {
+        "title": "¡Felicidades!",
+        "message": "¡Lo lograste! Has completado el 100% de tus listas. ¡Qué logro! Tómate un momento para celebrar tu éxito."
+      }
+    }      
+  },
+  "collection": {
+    "empty": {
+      "title": "¡Ups! Nada que ver aquí",
+      "label": "¡Agrega nuevos elementos con un toque o hablando!"
+    },
+    "new_item": "Agregar nuevos elementos...",
+    "recording": "Escuchando tu voz..."
+  },
+  "settings": {
+    "nav": {
+      "language": "Idioma",
+      "rate": "Calificar app",
+      "delete": "Eliminar cuenta",
+      "log_out": "Cerrar sesión"
+    }
+  },
+
+  "account": {
+    "offboarding": {
+      "delete": {
+        "title": ["¿Estás seguro de ", "eliminar", " tu cuenta?"],
+        "access_data": "Perderás acceso a tu cuenta y no podrás volver a iniciar sesión.",
+        "stored_data": "Toda tu información será eliminada permanentemente.",
+        "shared_data": "Cualquier lista que hayas creado y compartido con otros también será eliminada.",
+        "warning": "Entiendo que mi cuenta y todos los datos asociados serán eliminados permanentemente.",
+        "password": "Para continuar, por favor ingresa tu contraseña en la sección de abajo",
+        "placeholder": "Ingresa tu contraseña"
+      },
+      "feedback": {
+        "title": "¡Lamentamos que te vayas!",
+        "description": "Antes de eliminar tu cuenta, nos encantaría saber sobre tu experiencia con nuestro servicio. Tu retroalimentación nos ayudará a mejorar nuestro servicio.",
+        "reasons": [
+          "Encontré una mejor alternativa",
+          "Ya no necesito el servicio",
+          "Problemas de experiencia de usuario",
+          "Preocupaciones de privacidad",
+          "Otro"
+        ],
+        "placeholder": "Por favor, tómate un momento para compartir tus pensamientos con nosotros."
+      },
+      "cancel": "Cancelar",
+      "confirm": "Eliminar cuenta"
+    }
+  }
+}

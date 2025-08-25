@@ -1,0 +1,181 @@
+{
+  "app": {
+    "name": "Klever",
+    "settings": "Settings"
+  },
+  "forms": {
+    "auth": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "confirm": {
+        "label": "Confirm password",
+        "placeholder": "Confirm your password"
+      }
+    }
+  },
+  "modals": {
+    "locale": {
+      "label": "Select language",
+      "options": {
+        "en": "English",
+        "es": "Spanish"
+      }
+    }
+  },
+  "toast": {
+    "auth": {
+      "password": {
+        "PASSWORD_TOO_SHORT": "Password must contain at least 8 characters",
+        "PASSWORDS_DO_NOT_MATCH": "Passwords entered don't match",
+        "UNKNOWN_ERROR": "Something went wrong"
+      },
+      "email": {
+        "auth/email-already-in-use": "That email address is already in use",
+        "auth/invalid-email": "That email address is invalid",
+        "auth/invalid-credential": "Invalid credentials, please try again",
+        "auth/network-request-failed": "Please check your network connection",
+        "DEFAULT": "Something went wrong"
+      },
+      "google": {
+        "SIGN_IN_CANCELLED": "Sign in process was cancelled",
+        "IN_PROGRESS": "Another process in progress",
+        "PLAY_SERVICES_NOT_AVAILABLE": "Play services not available",
+        "DEFAULT": "Something went wrong, check your network connection"
+      }
+    },
+    "user": {
+      "locale": {
+        "update": {
+          "title": "Success",
+          "message": "App language has been updated"
+        }
+      },
+      "board": {
+        "delete": {
+          "title": "Success",
+          "message": "A board has been deleted"
+        }
+      },
+      "collection": {
+        "delete": {
+          "title": "Success",
+          "message": "An item has been deleted from checklist"
+        }
+      }
+    },
+    "app": {
+      "board_error": "Could not create board",
+      "account_error": "Failed to delete account. Please try again"
+    }
+  },
+
+  "sign_in": {
+    "header": "Sign in to ",
+    "action": "Sign in",
+    "google": "Continue with Google",
+    "redirect": {
+      "label": "Don't have an account? ",
+      "to": "Sign up"
+    }
+  },
+  "sign_up": {
+    "header": "Sign up to ",
+    "action": "Sign up",
+    "redirect": {
+      "label": "Already have an account? ",
+      "to": "Sign in"
+    }
+  },
+
+  "home": {
+    "grettings": "Hello ",
+    "boards": "Collections",
+    "empty": {
+      "title": "Hmm, looks like it's empty",
+      "label": "Add new collections in the section below!"
+    },
+    "new_item": "Create new collection here...",
+    "board_completed": "Completed!",
+
+    "summary": {
+      "0": {
+        "title": "Let's get started!",
+        "message": "You're off to a great start! Begin tackling your checklists and watch your progress grow."
+      },
+      "15": {
+        "title": "Making progress!",
+        "message": "You've completed {{percent}} of your checklists. Keep up the momentum and keep checking tasks off!"
+      },
+      "30": {
+        "title": "Halfway there!",
+        "message": "You've reached {{percent}} of your checklists. You're making steady progress, keep it up!"
+      },
+      "50": {
+        "title": "Halfway mark!",
+        "message": "Congratulations! You've completed {{percent}} of your checklists. You're halfway there, keep pushing forward!"
+      },
+      "75": {
+        "title": "Almost done!",
+        "message": "Fantastic job! You've completed {{percent}} of your checklists. You're almost at the finish line, keep going strong!"
+      },
+      "90": {
+        "title": "Home stretch!",
+        "message": "You're almost there! With {{percent}} of your checklists completed, the finish line is in sight. Keep up the great work!"
+      },
+      "100": {
+        "title": "Congratulations!",
+        "message": "You did it! You've completed 100% of your checklists. What an achievement! Take a moment to celebrate your success!"
+      }
+    }
+  },
+  "collection": {
+    "empty": {
+      "title": "Oops! Nothing to see here",
+      "label": "Add new items with a tap or talk!"
+    },
+    "new_item": "Add new items...",
+    "recording": "Listening for your voice..."
+  },
+  "settings": {
+    "nav": {
+      "language": "Language",
+      "rate": "Rate app",
+      "delete": "Delete account",
+      "log_out": "Log out"
+    }
+  },
+
+  "account": {
+    "offboarding": {
+      "delete": {
+        "title": ["Are you sure to ", "delete", " your account?"],
+        "access_data": "You will lose access to your account and will not be able to log in again.",
+        "stored_data": "All your information will be permanently deleted.",
+        "shared_data": "Any list you have created that has been shared with others also will be deleted.",
+        "warning": "I understand that my account and all associated data will be permanently deleted.",
+        "password": "To continue, please enter your password in the section below",
+        "placeholder": "Enter your password"
+      },
+      "feedback": {
+        "title": "We're sorry to see you go!",
+        "description": "We'd love to hear why you're leaving. Your feedback will help us improve.",
+        "reasons": [
+          "Found a better alternative",
+          "No longer need the service",
+          "User experience issues",
+          "Privacy concerns",
+          "Other"
+        ],
+        "placeholder": "Please take a moment to share your thoughts with us."
+      },
+      "cancel": "Cancel",
+      "confirm": "Delete account"
+    }
+  }
+}
