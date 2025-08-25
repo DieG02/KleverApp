@@ -20,6 +20,9 @@ importers:
       '@react-native-firebase/firestore':
         specifier: ^23.1.1
         version: 23.1.1(@react-native-firebase/app@23.1.1(@react-native-async-storage/async-storage@2.2.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0)))(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))
+      '@react-native-firebase/functions':
+        specifier: ^23.1.1
+        version: 23.1.1(@react-native-firebase/app@23.1.1(@react-native-async-storage/async-storage@2.2.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0)))(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))
       '@react-native-google-signin/google-signin':
         specifier: ^15.0.0
         version: 15.0.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
@@ -1290,6 +1293,11 @@ packages:
 
   '@react-native-firebase/firestore@23.1.1':
     resolution: {integrity: sha512-Pw/jcK5fZQKL7yMeopXNu7IMkfmL3AI1dk3EbNK2hqaith49FVr4wctGuRiZ7r6/lDxYRwWS0G0CQSdZq+od0A==}
+    peerDependencies:
+      '@react-native-firebase/app': 23.1.1
+
+  '@react-native-firebase/functions@23.1.1':
+    resolution: {integrity: sha512-XlmF+oi1cpqajf/BXGTRxSHqMUiGsF22D/BngJ74rtH7atX91Vr675/rRzY7p9rByPomCtBzsEN0JnF4TLUmMA==}
     peerDependencies:
       '@react-native-firebase/app': 23.1.1
 
@@ -6054,6 +6062,10 @@ snapshots:
       react-native-url-polyfill: 2.0.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))
     transitivePeerDependencies:
       - react-native
+
+  '@react-native-firebase/functions@23.1.1(@react-native-firebase/app@23.1.1(@react-native-async-storage/async-storage@2.2.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0)))(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0))':
+    dependencies:
+      '@react-native-firebase/app': 23.1.1(@react-native-async-storage/async-storage@2.2.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0)))(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)
 
   '@react-native-google-signin/google-signin@15.0.0(react-native@0.80.2(@babel/core@7.28.3)(@react-native-community/cli@19.1.1(typescript@5.0.4))(@types/react@19.1.11)(react@19.1.0))(react@19.1.0)':
     dependencies:
