@@ -71,7 +71,11 @@
     },
     "app": {
       "board_error": "Could not create board",
-      "account_error": "Failed to delete account. Please try again"
+      "account_error": "Failed to delete account. Please try again",
+      "delete_account": {
+        "title": "Account deleted",
+        "message": "Your account and all associated data have been permanently removed."
+      }
     }
   },
 

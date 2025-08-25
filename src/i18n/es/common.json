@@ -71,7 +71,11 @@
     },
     "app": {
       "board_error": "No se pudo crear el tablero",
-      "account_error": "No se ha podido eliminar la cuenta. Inténtalo de nuevo"
+      "account_error": "No se ha podido eliminar la cuenta. Inténtalo de nuevo",
+      "delete_account": {
+        "title": "Cuenta eliminada",
+        "message": "Tu cuenta y todos tus datos han sido eliminados permanentemente."
+      }
     }
   },
 

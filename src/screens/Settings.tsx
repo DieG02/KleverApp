@@ -15,6 +15,7 @@ import {
   UserMinusIcon,
   HeartIcon,
 } from 'react-native-heroicons/mini';
+import { useLoading } from '../context/LoadingContext';
 import NavItem from '../components/NavItem';
 import { AuthLogOut } from '../services/firestore/auth';
 import { LanguageModal } from '../components/modal/';
@@ -27,13 +28,22 @@ interface SettingsProps {
 export default function Settings({ navigation }: SettingsProps) {
   const [localeModalVisible, setLocaleModalVisible] = useState<boolean>(false);
   const { user } = useSession();
+  const { setLoading } = useLoading();
   const { t } = useTranslation();
 
   const showLocaleModal = () => setLocaleModalVisible(true);
   const hideLocaleModal = () => setLocaleModalVisible(false);
 
   const handleLogout = async () => {
-    await AuthLogOut();
+    setLoading(true);
+    try {
+      await AuthLogOut();
+    } catch (e) {
+      console.error('There was an error while loging out, try again.');
+    } finally {
+      setLoading(false);
+    }
+
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -48,7 +58,7 @@ export default function Settings({ navigation }: SettingsProps) {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar barStyle='dark-content' backgroundColor='#FFFFFF' />
+      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
         <View>
           {user?.avatar ? (
@@ -59,10 +69,10 @@ export default function Settings({ navigation }: SettingsProps) {
         </View>
         <Spacing />
 
-        <Heading type='Semibold' size={18}>
+        <Heading type="Semibold" size={18}>
           {user?.display_name}
         </Heading>
-        <Heading type='Medium' color='Label' size={13}>
+        <Heading type="Medium" color="Label" size={13}>
           {user?.email}
         </Heading>
         <Spacing size={30} />
@@ -95,7 +105,7 @@ export default function Settings({ navigation }: SettingsProps) {
         icon={UserMinusIcon}
         label={t('settings.nav.delete')}
         onPress={handleRedirect}
-        type='Danger'
+        type="Danger"
         arrow
       />
 
