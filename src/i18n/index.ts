@@ -23,7 +23,7 @@ const languageDetector = {
         return callback(saved);
       }
     } catch (e) {
-      console.log('Error reading language', e);
+      console.error('Error reading language', e);
     }
 
     // fallback al idioma del sistema
@@ -38,7 +38,7 @@ const languageDetector = {
     try {
       await AsyncStorage.setItem(LANGUAGE_KEY, lng);
     } catch (e) {
-      console.log('Error saving language', e);
+      console.error('Error saving language', e);
     }
   },
 };

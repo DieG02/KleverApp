@@ -6,17 +6,14 @@ import {
   doc,
   setDoc,
   updateDoc,
-  deleteDoc,
-  getDocs,
   serverTimestamp,
-  query,
-  where,
 } from '@react-native-firebase/firestore';
-import { getAuth } from '@react-native-firebase/auth';
+import { getAuth, signOut } from '@react-native-firebase/auth';
+import { getFunctions, httpsCallable } from '@react-native-firebase/functions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { UserModel } from '../../types/models';
 import { AuthProviders } from '../../types';
-import { removeBoard } from './board';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* ------------------------------------------------------------------ */
 /* 1. Create a new user                                                 */
@@ -84,30 +81,18 @@ export const updateLocale = async (locale: string) => {
 /* ------------------------------------------------------------------ */
 /* 3. Delete a user and all associated data                             */
 /* ------------------------------------------------------------------ */
-export const deleteUserData = async (user_id: string) => {
-  const db = getFirestore();
-  const userRef = doc(db, 'users', user_id);
-  const boardsRef = collection(db, 'boards');
+export const deleteUserData = async () => {
+  const auth = getAuth();
+  const fn = httpsCallable(getFunctions(), 'removeUserCloud');
+  const response = await fn();
+  await signOut(auth);
+  return response;
+};
 
-  try {
-    // Find all boards owned by this user
-    const q = query(boardsRef, where('user_id', '==', user_id));
-    const boardsSnapshot = await getDocs(q);
-
-    if (!boardsSnapshot.empty) {
-      const boardIds = boardsSnapshot.docs.map((d: any) => d.id);
-      await removeBoard(boardIds);
-    }
-
-    // Delete the user document
-    await deleteDoc(userRef);
-    console.log(`Deleted user profile for UID: ${user_id}`);
-
-    // Optional: confirm deletion
-    // const userSnapshot = await getDoc(userRef);
-    // console.log('User exists after deletion?', userSnapshot.exists());
-  } catch (err) {
-    console.error('Failed to delete user data:', err);
-    throw err;
-  }
+export const debug = async () => {
+  const auth = getAuth();
+  console.log('🔐 UID:', auth.currentUser?.uid);
+  console.log('🔐 token:', await auth.currentUser?.getIdToken());
+  const fn = httpsCallable(getFunctions(), 'debugAuth');
+  return await fn();
 };
