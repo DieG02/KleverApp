@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAuth } from '@react-native-firebase/auth';
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import {
   getFirestore,
   collection,
@@ -17,47 +17,56 @@ const useBoards = () => {
   const [error, setError] = useState<any>(null);
 
   useEffect(() => {
-    const auth = getAuth();
     const db = getFirestore();
-    const user_id = auth.currentUser?.uid;
+    const auth = getAuth();
+    let unsubFirestore: (() => void) | null = null;
 
-    if (!user_id) return;
+    // 1. Auth Subscription
+    const unsubAuth = onAuthStateChanged(auth, user => {
+      // 2. Always kill any previous Firestore listener
+      if (unsubFirestore) {
+        unsubFirestore();
+        unsubFirestore = null;
+      }
 
-    setIsLoading(true);
+      if (user?.uid) {
+        const boardsQuery = query(
+          collection(db, 'boards'),
+          where('user_id', '==', user.uid),
+          orderBy('created_at', 'desc'),
+        );
+        setIsLoading(true);
 
-    try {
-      // create the query
-      const boardsQuery = query(
-        collection(db, 'boards'),
-        where('user_id', '==', user_id),
-        orderBy('created_at', 'desc'),
-      );
+        // 3. Firestore subscription
+        unsubFirestore = onSnapshot(
+          boardsQuery,
+          (snapshot: NativeTypes.QuerySnapshot<NativeTypes.DocumentData>) => {
+            const updatedBoards: BoardModel[] = snapshot.docs.map(
+              doc => doc.data() as BoardModel,
+            );
+            setBoards(updatedBoards);
+            setIsLoading(false);
+          },
+          e => {
+            console.error('Firestore error:', e);
+            setError(e);
+            setIsLoading(false);
+          },
+        );
+      } else {
+        // User logged out, clear boards
+        setBoards(null);
+        setError(null);
+        setIsLoading(false);
+      }
+    });
 
-      // subscribe to snapshot
-      const unsubscribe = onSnapshot(
-        boardsQuery,
-        (snapshot: NativeTypes.QuerySnapshot<NativeTypes.DocumentData>) => {
-          const updatedBoards: BoardModel[] = snapshot.docs.map(
-            doc => doc.data() as BoardModel,
-          );
-          setBoards(updatedBoards);
-          setIsLoading(false);
-        },
-        e => {
-          console.error('Firestore error:', e);
-          setError(e);
-          setIsLoading(false);
-        },
-      );
-
-      return () => unsubscribe();
-    } catch (err) {
-      console.error('Error fetching user boards:', err);
-      setError(err);
-      setIsLoading(false);
-    }
+    // 4. Return one cleanup that tears down both listeners
+    return () => {
+      if (unsubFirestore) unsubFirestore();
+      unsubAuth();
+    };
   }, []);
-
   return { boards, isLoading, error };
 };
 
