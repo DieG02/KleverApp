@@ -7,24 +7,29 @@ import GoogleSVG from '../assets/svg/Google';
 import { Colors } from '../styles/global';
 import { AuthWithGoogle } from '../services/firestore/auth';
 import { createNewUser } from '../services/firestore/user';
+import { useLoading } from '../context/LoadingContext';
 
 interface GoogleAuthButtonProps {}
 export default function GoogleAuthButton({}: GoogleAuthButtonProps) {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation();
+  const { setLoading } = useLoading();
 
   const handleGoogleAuth = async () => {
-    const userCredentials = await AuthWithGoogle();
-    if (!userCredentials) return null;
-    const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
-    if (isNewUser) {
-      await createNewUser(userCredentials.user, 'google');
-      // TODO: Redirect to complete profile
+    setLoading(true);
+    try {
+      const userCredentials = await AuthWithGoogle();
+      const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
+      if (isNewUser) {
+        await createNewUser(userCredentials.user, 'google');
+      }
+
+      navigation.reset({ index: 0, routes: [{ name: 'AppStack' }] });
+    } catch (err: any) {
+      console.error('There was an error while signing in, try again.');
+    } finally {
+      setLoading(false);
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'AppStack' }],
-    });
   };
 
   return (

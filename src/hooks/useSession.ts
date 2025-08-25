@@ -35,45 +35,53 @@ const useSession = (): UseSessionReturn => {
     const app = getApp();
     const auth = getAuth(app);
     const db = getFirestore(app);
+    let unsubFirestore: (() => void) | null = null;
 
-    // auth state listener
-    const unsubscribeAuth = onAuthStateChanged(
+    // 1. Auth Subscription
+    const unsubAuth = onAuthStateChanged(
       auth,
-      (firebaseUser: FirebaseAuthTypes.User | null) => {
-        if (!firebaseUser) {
-          setSession({ user: null, ref: null, loading: false, error: null });
-          return;
+      (user: FirebaseAuthTypes.User | null) => {
+        // 2. Always kill any previous Firestore listener
+        if (unsubFirestore) {
+          unsubFirestore();
+          unsubFirestore = null;
         }
 
-        const userRef: NativeTypes.DocumentReference = doc(
-          db,
-          'users',
-          firebaseUser.uid,
-        );
+        if (user?.uid) {
+          const userRef: NativeTypes.DocumentReference = doc(
+            db,
+            'users',
+            user.uid,
+          );
 
-        // firestore subscription
-        const unsubscribeUser = onSnapshot(
-          userRef,
-          userSnapshot => {
-            const userData = userSnapshot.data() as any;
-            setSession({
-              user: userData,
-              ref: userSnapshot.ref,
-              loading: false,
-              error: null,
-            });
-          },
-          e => {
-            console.error('Firestore error:', e);
-            setSession(prev => ({ ...prev, loading: false, error: e }));
-          },
-        );
-
-        return () => unsubscribeUser();
+          // 3. Firestore subscription
+          unsubFirestore = onSnapshot(
+            userRef,
+            userSnapshot => {
+              const userData = userSnapshot.data() as any;
+              setSession({
+                user: userData,
+                ref: userSnapshot.ref,
+                loading: false,
+                error: null,
+              });
+            },
+            e => {
+              console.error('Firestore error:', e);
+              setSession(prev => ({ ...prev, loading: false, error: e }));
+            },
+          );
+        } else {
+          setSession({ user: null, ref: null, loading: false, error: null });
+        }
       },
     );
 
-    return () => unsubscribeAuth();
+    // 4. Return one cleanup that tears down both listeners
+    return () => {
+      if (unsubFirestore) unsubFirestore();
+      unsubAuth();
+    };
   }, []);
 
   return session;

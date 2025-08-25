@@ -89,11 +89,21 @@ export const AuthWithCredentials = async (
 };
 
 export const AuthLogOut = async () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user?.providerData.some(p => p.providerId === 'google.com')) {
+      // @ts-ignore (google-signin is optional)
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+    }
 
-  if (user?.displayName) await GoogleSignin.revokeAccess();
-  return signOut(auth);
+    // Sign out of Firebase (works for every provider)
+    await signOut(auth);
+  } catch (err) {
+    console.error('Logout failed:', err);
+    throw err;
+  }
 };
 
 interface CredentialsProps {
