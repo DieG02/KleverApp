@@ -16,6 +16,7 @@ import {
 import { Colors } from '../styles/global';
 import styles from '../styles/screens/deleteaccount';
 import { AppNavigationProps, AppRouteProps } from '../types/navigation';
+import { useLoading } from '../context/LoadingContext';
 import { ReauthenticateUser } from '../services/firestore/auth';
 import { CommonActions } from '@react-navigation/native';
 import { getAuth } from '@react-native-firebase/auth';
@@ -35,6 +36,7 @@ export default function DeleteAccount({
 }: DeleteAccountProps) {
   const { t } = useTranslation();
   const { user } = useSession();
+  const { setLoading } = useLoading();
   const [password, setPassword] = useState<string>('');
   const [isActive, setActive] = useState<boolean>(false);
   const [provider, setProvider] = useState<AuthProvidersState>(null);
@@ -46,6 +48,7 @@ export default function DeleteAccount({
 
   const handleDelete = async () => {
     try {
+      setLoading(true);
       const auth = getAuth();
       const currentUser = auth.currentUser;
       const user_id = currentUser?.uid;
@@ -58,16 +61,18 @@ export default function DeleteAccount({
       );
       if (!reauthResult.success) throw reauthResult.error;
 
-      await deleteUserData()
-        .then((r: any) => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
-            }),
-          );
-        })
-        .catch(err => console.error('❌ debugAuth:', err));
+      await deleteUserData();
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
+        }),
+      );
+      Toast.show({
+        text1: t('toast.app.delete_account.title'),
+        text2: t('toast.app.delete_account.message'),
+        type: 'success',
+      });
     } catch (error) {
       console.error('Error deleting account:', error);
       Toast.show({
@@ -75,6 +80,8 @@ export default function DeleteAccount({
         text2: t('toast.app.account_error'),
         type: 'error',
       });
+    } finally {
+      setLoading(false); // 🔓 overlay disappears
     }
   };
 
