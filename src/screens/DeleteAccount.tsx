@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import {
@@ -18,12 +18,11 @@ import styles from '../styles/screens/deleteaccount';
 import { AppNavigationProps, AppRouteProps } from '../types/navigation';
 import { ReauthenticateUser } from '../services/firestore/auth';
 import { CommonActions } from '@react-navigation/native';
+import { getAuth } from '@react-native-firebase/auth';
+import Toast from 'react-native-toast-message';
 import { useSession } from '../hooks';
 import { deleteUserData } from '../services/firestore/user';
 import { AuthProvidersState } from '../types';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
-import Toast from 'react-native-toast-message';
 
 interface DeleteAccountProps {
   navigation: AppNavigationProps;
@@ -41,41 +40,34 @@ export default function DeleteAccount({
   const [provider, setProvider] = useState<AuthProvidersState>(null);
   const toggle = () => setActive(!isActive);
 
-  const handleRedirect = () => {
-    navigation.goBack();
-  };
+  const handleRedirect = () => navigation.goBack();
 
-  const handleChange = (value: string) => {
-    setPassword(value);
-  };
+  const handleChange = (value: string) => setPassword(value);
 
   const handleDelete = async () => {
     try {
-      const user = auth().currentUser;
-      const user_id = user?.uid;
-      if (!user || !user_id) throw new Error('User not logged in');
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      const user_id = currentUser?.uid;
+      if (!currentUser || !user_id) throw new Error('User not logged in');
 
       const reauthResult = await ReauthenticateUser(
-        user,
-        user?.providerData[0]?.providerId!,
+        currentUser,
+        currentUser.providerData[0]?.providerId!,
         password,
       );
       if (!reauthResult.success) throw reauthResult.error;
 
-      await deleteUserData(user_id);
-      await user.delete();
-
-      if (reauthResult.provider === 'google') {
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-      }
-
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
-        }),
-      );
+      await deleteUserData()
+        .then((r: any) => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
+            }),
+          );
+        })
+        .catch(err => console.error('❌ debugAuth:', err));
     } catch (error) {
       console.error('Error deleting account:', error);
       Toast.show({
