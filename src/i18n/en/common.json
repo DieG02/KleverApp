@@ -47,6 +47,20 @@
         "IN_PROGRESS": "Another process in progress",
         "PLAY_SERVICES_NOT_AVAILABLE": "Play services not available",
         "DEFAULT": "Something went wrong, check your network connection"
+      },
+      "error": {
+        "SIGN_UP": {
+          "title": "Sign-up failed",
+          "description": "Check email & password, then retry."
+        },
+        "LOG_OUT": {
+          "title": "Logout failed",
+          "description": "Retry; if persists, restart app."
+        },
+        "SIGN_IN": {
+          "title": "Sign-in failed",
+          "description": "Check credentials, then retry."
+        }
       }
     },
     "user": {

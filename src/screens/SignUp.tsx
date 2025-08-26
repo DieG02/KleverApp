@@ -18,6 +18,8 @@ import {
 import { createNewUser } from '../services/firestore/user';
 import { AuthNavigationProps } from '../types/navigation';
 import styles from '../styles/screens/signup';
+import { useLoading } from '../context/LoadingContext';
+import Toast from 'react-native-toast-message';
 
 interface CredentialsProps {
   email: string;
@@ -31,6 +33,7 @@ interface SignUpProps {
 export default function SignUp({ navigation }: SignUpProps) {
   const [keyboardShown, setKeyboardShown] = useState(false);
   const { t } = useTranslation();
+  const { setLoading } = useLoading();
   const [credentials, setCredentials] = useState<CredentialsProps>({
     email: '',
     password: '',
@@ -52,24 +55,36 @@ export default function SignUp({ navigation }: SignUpProps) {
   };
 
   const handleSignUp = async () => {
-    const verified = VerifyCredentials(credentials);
-    if (!verified) return null;
+    try {
+      setLoading(true);
+      const verified = VerifyCredentials(credentials);
+      if (!verified) return null;
 
-    const userCredentials = await AuthWithCredentials(credentials, true);
-    if (!userCredentials) return null;
+      const userCredentials = await AuthWithCredentials(credentials, true);
+      if (!userCredentials) return null;
 
-    const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
-    if (isNewUser) {
-      await createNewUser(userCredentials.user, 'email');
-      // TODO: Redirect to complete profile
+      const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
+      if (isNewUser) {
+        await createNewUser(userCredentials.user, 'email');
+        // TODO: Redirect to complete profile
+      }
+
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'AppStack', params: { screen: 'Home' } }],
+        }),
+      );
+    } catch (err: any) {
+      console.error('SIGN_UP_ERROR:', err.message);
+      Toast.show({
+        text1: t('toast.auth.error.SIGN_UP.title'),
+        text2: t('toast.auth.error.SIGN_UP.description'),
+        type: 'error',
+      });
+    } finally {
+      setLoading(false);
     }
-
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'AppStack', params: { screen: 'Home' } }],
-      }),
-    );
   };
 
   useEffect(() => {
@@ -87,7 +102,7 @@ export default function SignUp({ navigation }: SignUpProps) {
     };
   }, []);
   return (
-    <Layout backgroundColor='White' barStyle='dark-content'>
+    <Layout backgroundColor="White" barStyle="dark-content">
       <View style={styles.wrapper}>
         {!keyboardShown && (
           <View style={styles.banner}>
@@ -95,7 +110,7 @@ export default function SignUp({ navigation }: SignUpProps) {
           </View>
         )}
 
-        <Heading size={20} type='Semibold' style={styles.header}>
+        <Heading size={20} type="Semibold" style={styles.header}>
           <Text>{t('sign_up.header')}</Text>
           <Text style={styles.hightlight}>{t('app.name')}</Text>
         </Heading>
@@ -122,7 +137,7 @@ export default function SignUp({ navigation }: SignUpProps) {
         </MainButton>
 
         <Pressable onPress={handleRedirect} style={styles.footer}>
-          <Heading type='Medium' color='Label' style={styles.link}>
+          <Heading type="Medium" color="Label" style={styles.link}>
             <Text>{t('sign_up.redirect.label')}</Text>
             <Text style={styles.hightlight}>{t('sign_up.redirect.to')}</Text>
           </Heading>
