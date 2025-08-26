@@ -1,14 +1,18 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "com.facebook.react"
-apply plugin: 'com.google.gms.google-services'
 
+// 1. tell react-native-config which files to map to which build types
 project.ext.envConfigFiles = [
-    dev: ".env.dev",
-    prod: ".env.prod",
+    dev  : ".env.dev",
+    prod : ".env.prod",
 ]
 
+// 2. apply dotenv helper **before** react-native plugin
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+// 3. now let the RN plugin do its thing
+apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services"
 
 /**
  * This is the configuration block to customize your React Native Android app.

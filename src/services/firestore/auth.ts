@@ -55,6 +55,7 @@ export const AuthWithGoogle = async () => {
       text2: toastRef.message,
       type: toastRef.type,
     });
+    console.error('There was an error:', error.message, error.code);
   }
 };
 
