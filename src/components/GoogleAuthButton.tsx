@@ -8,6 +8,7 @@ import { Colors } from '../styles/global';
 import { AuthWithGoogle } from '../services/firestore/auth';
 import { createNewUser } from '../services/firestore/user';
 import { useLoading } from '../context/LoadingContext';
+import Toast from 'react-native-toast-message';
 
 interface GoogleAuthButtonProps {}
 export default function GoogleAuthButton({}: GoogleAuthButtonProps) {
@@ -19,12 +20,20 @@ export default function GoogleAuthButton({}: GoogleAuthButtonProps) {
     setLoading(true);
     try {
       const userCredentials = await AuthWithGoogle();
-      const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
-      if (isNewUser) {
-        await createNewUser(userCredentials.user, 'google');
-      }
+      if (userCredentials) {
+        const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
+        if (isNewUser) {
+          await createNewUser(userCredentials.user, 'google');
+        }
 
-      navigation.reset({ index: 0, routes: [{ name: 'AppStack' }] });
+        navigation.reset({ index: 0, routes: [{ name: 'AppStack' }] });
+      } else {
+        Toast.show({
+          text1: 'Error',
+          text2: 'Cannot continue with the sign in',
+          type: 'error',
+        });
+      }
     } catch (err: any) {
       console.error('There was an error while signing in, try again.');
     } finally {
