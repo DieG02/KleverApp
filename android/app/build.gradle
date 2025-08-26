@@ -3,6 +3,12 @@ apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 apply plugin: 'com.google.gms.google-services'
 
+project.ext.envConfigFiles = [
+    dev: ".env.dev",
+    prod: ".env.prod",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -93,11 +99,11 @@ android {
         dev {
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
-            manifestPlaceholders = [appName: "KleverApp Dev"]
+            manifestPlaceholders = [appName: "Klever Dev"]
         }
 
         prod {
-            manifestPlaceholders = [appName: "KleverApp"]
+            manifestPlaceholders = [appName: "Klever"]
         }
     }
     signingConfigs {
@@ -107,6 +113,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        prod {
+            storeFile file('release.keystore')
+            storePassword 'klever-apk'
+            keyAlias 'klever-app-playstore'
+            keyPassword 'klever-apk'
+        }
     }
     buildTypes {
         debug {
@@ -115,7 +127,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.prod
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -126,6 +138,7 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation platform('com.google.firebase:firebase-bom:34.1.0')
+    implementation project(':react-native-config')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

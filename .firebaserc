@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "klever-dev-959e2"
+    "dev": "klever-dev-959e2",
+    "prod": "klever-24d61"
   }
 }
