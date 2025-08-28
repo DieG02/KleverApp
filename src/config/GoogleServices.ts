@@ -1,5 +1,5 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import Config from 'react-native-config';
+import { WEB_CLIENT_ID } from '@env';
 
 try {
   GoogleSignin.configure({
@@ -8,7 +8,7 @@ try {
       // 'https://www.googleapis.com/auth/user.gender.read',
       // 'https://www.googleapis.com/auth/user.addresses.read',
     ],
-    webClientId: Config.WEB_CLIENT_ID,
+    webClientId: WEB_CLIENT_ID,
     offlineAccess: true,
   });
 } catch (error: any) {

@@ -21,6 +21,7 @@ import { AuthLogOut } from '../services/firestore/auth';
 import { LanguageModal } from '../components/modal/';
 import { AppNavigationProps } from '../types/navigation';
 import styles from '../styles/screens/settings';
+import Toast from 'react-native-toast-message';
 
 interface SettingsProps {
   navigation: AppNavigationProps;
@@ -35,21 +36,25 @@ export default function Settings({ navigation }: SettingsProps) {
   const hideLocaleModal = () => setLocaleModalVisible(false);
 
   const handleLogout = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       await AuthLogOut();
-    } catch (e) {
-      console.error('There was an error while loging out, try again.');
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
+        }),
+      );
+    } catch (err: any) {
+      console.error('LOG_OUT_ERROR:', err.message);
+      Toast.show({
+        text1: t('toast.auth.error.LOG_OUT.title'),
+        text2: t('toast.auth.error.LOG_OUT.description'),
+        type: 'error',
+      });
     } finally {
       setLoading(false);
     }
-
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'AuthStack', params: { screen: 'SignIn' } }],
-      }),
-    );
   };
 
   const handleRedirect = () => {

@@ -17,8 +17,8 @@ export default function GoogleAuthButton({}: GoogleAuthButtonProps) {
   const { setLoading } = useLoading();
 
   const handleGoogleAuth = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const userCredentials = await AuthWithGoogle();
       if (userCredentials) {
         const isNewUser = userCredentials?.additionalUserInfo?.isNewUser;
@@ -27,15 +27,14 @@ export default function GoogleAuthButton({}: GoogleAuthButtonProps) {
         }
 
         navigation.reset({ index: 0, routes: [{ name: 'AppStack' }] });
-      } else {
-        Toast.show({
-          text1: 'Error',
-          text2: 'Cannot continue with the sign in',
-          type: 'error',
-        });
       }
     } catch (err: any) {
-      console.error('There was an error while signing in, try again.');
+      console.error('SIGN_IN_ERROR:', err.message);
+      Toast.show({
+        text1: t('toast.auth.error.SIGN_IN.title'),
+        text2: t('toast.auth.error.SIGN_IN.description'),
+        type: 'error',
+      });
     } finally {
       setLoading(false);
     }

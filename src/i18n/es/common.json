@@ -47,8 +47,23 @@
         "IN_PROGRESS": "Otro proceso en curso",
         "PLAY_SERVICES_NOT_AVAILABLE": "Servicios de Google Play no disponibles",
         "DEFAULT": "Algo salió mal, verifica tu conexión de red"
+      }, 
+      "error": {
+        "SIGN_UP": {
+          "title": "Registro fallido",
+          "description": "Verifica correo y contraseña, luego reintenta."
+        },
+        "LOG_OUT": {
+          "title": "Cierre de sesión fallido",
+          "description": "Reintenta; si persiste, reinicia la app."
+        },
+        "SIGN_IN": {
+          "title": "Inicio de sesión fallido",
+          "description": "Verifica credenciales, luego reintenta."
+        }
       }
     },
+
     "user": {
       "locale": {
         "update": {
