@@ -133,9 +133,19 @@ export default function DeleteAccount({
             </View>
             <Spacing size={10} />
 
-            <Pressable style={styles.condition} onPress={toggle}>
+            <Pressable
+              style={styles.condition}
+              onPress={toggle}
+              testID="warning-checkbox"
+            >
               <View style={[styles.base, isActive && styles.active]}>
-                {isActive && <CheckIcon color={Colors.White} size={15} />}
+                {isActive && (
+                  <CheckIcon
+                    testID="check-icon"
+                    color={Colors.White}
+                    size={15}
+                  />
+                )}
               </View>
               <View style={styles.flex}>
                 <Heading size={13}>
@@ -151,8 +161,9 @@ export default function DeleteAccount({
               <Heading>{t('account.offboarding.delete.password')}</Heading>
               <Spacing size={8} />
               <PasswordField
-                placeholder={t('account.offboarding.delete.placeholder')}
+                value={password}
                 onChangeText={handleChange}
+                placeholder={t('account.offboarding.delete.placeholder')}
               />
             </>
           )}
@@ -167,6 +178,7 @@ export default function DeleteAccount({
           <TouchableDebounce
             disabled={user?.provider === 'email' && !password}
             style={[styles.confirm, !isActive && styles.hide]}
+            testID="btn-delete"
             onPress={handleDelete}
           >
             <Heading type="Semibold" color="Danger">

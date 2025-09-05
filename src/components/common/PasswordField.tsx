@@ -78,6 +78,7 @@ export default function PasswordField(
           style={inputMixStyle}
           placeholderTextColor={Colors.Label}
           secureTextEntry={!visible}
+          testID="password-field"
           {...inputProps}
         />
         <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>

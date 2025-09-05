@@ -29,10 +29,10 @@ export default function ItemSkeleton() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Svg viewBox='0 0 380 50'>
-        <Circle x='20' y='20' cx='5' cy='5' r='8' fill={fill} />
-        <Rect x='50' y='20' rx='5' ry='5' width='275' height='10' fill={fill} />
+    <View style={styles.container} testID="item-skeleton">
+      <Svg viewBox="0 0 380 50">
+        <Circle x="20" y="20" cx="5" cy="5" r="8" fill={fill} />
+        <Rect x="50" y="20" rx="5" ry="5" width="275" height="10" fill={fill} />
       </Svg>
     </View>
   );
