@@ -30,11 +30,14 @@ export default function Collection({ route }: CollectionProps) {
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
         paddingRight: insets.right,
-      }}>
+      }}
+    >
       <KeyboardAvoidingView
         style={styles.wrapper}
         keyboardVerticalOffset={headerHeight}
-        behavior={BEHAVIOR}>
+        behavior={BEHAVIOR}
+        testID="keyboard-controller"
+      >
         <View style={styles.container}>
           {items && (
             <FlatList

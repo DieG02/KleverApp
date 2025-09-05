@@ -50,7 +50,7 @@ export default function Item({ item }: { item: ItemModel }) {
 
   return (
     <Swipeable renderRightActions={RightSideActions}>
-      <TouchableOpacity style={styles.item} onPress={handlePress}>
+      <TouchableOpacity style={styles.item} onPress={handlePress} testID="item">
         <View style={checked ? styles.itemChecked : styles.itemButton}>
           <CheckIcon
             color={checked ? Colors.White : 'transparent'}
