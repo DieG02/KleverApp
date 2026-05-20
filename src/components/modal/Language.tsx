@@ -17,6 +17,8 @@ export default function LanguageModal({
   const options = {
     en: 'en-GB',
     es: 'es-MX',
+    it: 'it-IT',
+    pt: 'pt-BR',
   };
 
   const handleUpdate = async (locale: string) => {
@@ -27,12 +29,13 @@ export default function LanguageModal({
     <Modal
       visible={visible}
       transparent={true}
-      animationType='fade'
+      animationType="fade"
       onRequestClose={onRequestClose}
-      statusBarTranslucent>
+      statusBarTranslucent
+    >
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
-          <Heading color='Placeholder' size={10} style={styles.title}>
+          <Heading color="Placeholder" size={10} style={styles.title}>
             {t('modals.locale.label')}
           </Heading>
 
@@ -42,11 +45,13 @@ export default function LanguageModal({
                 styles.item,
                 { marginBottom: 5 },
                 i18n.language === options['en'] && styles.selected,
-              ]}>
+              ]}
+            >
               <Heading
-                type='Medium'
+                type="Medium"
                 style={styles.center}
-                color={i18n.language === options['en'] ? 'Primary' : 'Label'}>
+                color={i18n.language === options['en'] ? 'Primary' : 'Label'}
+              >
                 {t('modals.locale.options.en')}
               </Heading>
             </View>
@@ -57,12 +62,48 @@ export default function LanguageModal({
               style={[
                 styles.item,
                 i18n.language === options['es'] && styles.selected,
-              ]}>
+              ]}
+            >
               <Heading
-                type='Medium'
+                type="Medium"
                 style={styles.center}
-                color={i18n.language === options['es'] ? 'Primary' : 'Label'}>
+                color={i18n.language === options['es'] ? 'Primary' : 'Label'}
+              >
                 {t('modals.locale.options.es')}
+              </Heading>
+            </View>
+          </Pressable>
+
+          <Pressable onPress={() => handleUpdate(options['it'])}>
+            <View
+              style={[
+                styles.item,
+                i18n.language === options['it'] && styles.selected,
+              ]}
+            >
+              <Heading
+                type="Medium"
+                style={styles.center}
+                color={i18n.language === options['it'] ? 'Primary' : 'Label'}
+              >
+                {t('modals.locale.options.it')}
+              </Heading>
+            </View>
+          </Pressable>
+
+          <Pressable onPress={() => handleUpdate(options['pt'])}>
+            <View
+              style={[
+                styles.item,
+                i18n.language === options['pt'] && styles.selected,
+              ]}
+            >
+              <Heading
+                type="Medium"
+                style={styles.center}
+                color={i18n.language === options['pt'] ? 'Primary' : 'Label'}
+              >
+                {t('modals.locale.options.pt')}
               </Heading>
             </View>
           </Pressable>
