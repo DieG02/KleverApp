@@ -1,0 +1,201 @@
+{
+  "app": {
+    "name": "Klever",
+    "settings": "Configurações"
+  },
+  "forms": {
+    "auth": {
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Digite seu e-mail"
+      },
+      "password": {
+        "label": "Senha",
+        "placeholder": "Digite sua senha"
+      },
+      "confirm": {
+        "label": "Confirmar senha",
+        "placeholder": "Confirme sua senha"
+      }
+    }
+  },
+  "modals": {
+    "locale": {
+      "label": "Selecionar idioma",
+      "options": {
+        "en": "Inglês",
+        "es": "Espanhol",
+        "it": "Italiano",
+        "pt": "Português"
+      }
+    }
+  },
+  "toast": {
+    "auth": {
+      "password": {
+        "PASSWORD_TOO_SHORT": "A senha deve conter pelo menos 8 caracteres",
+        "PASSWORDS_DO_NOT_MATCH": "As senhas digitadas não coincidem",
+        "UNKNOWN_ERROR": "Algo deu errado"
+      },
+      "email": {
+        "auth/email-already-in-use": "Este endereço de e-mail já está em uso",
+        "auth/invalid-email": "Este endereço de e-mail é inválido",
+        "auth/invalid-credential": "Credenciais inválidas, por favor tente novamente",
+        "auth/network-request-failed": "Verifique sua conexão de rede",
+        "DEFAULT": "Algo deu errado"
+      },
+      "google": {
+        "SIGN_IN_CANCELLED": "O processo de login foi cancelado",
+        "IN_PROGRESS": "Outro processo em andamento",
+        "PLAY_SERVICES_NOT_AVAILABLE": "Serviços do Play não disponíveis",
+        "DEFAULT": "Algo deu errado, verifique sua conexão de rede"
+      },
+      "error": {
+        "SIGN_UP": {
+          "title": "Falha no cadastro",
+          "description": "Verifique o e-mail e a senha e tente novamente."
+        },
+        "LOG_OUT": {
+          "title": "Falha ao sair",
+          "description": "Tente novamente; se persistir, reinicie o aplicativo."
+        },
+        "SIGN_IN": {
+          "title": "Falha no login",
+          "description": "Verifique suas credenciais e tente novamente."
+        }
+      }
+    },
+    "user": {
+      "locale": {
+        "update": {
+          "title": "Sucesso",
+          "message": "O idioma do aplicativo foi atualizado"
+        }
+      },
+      "board": {
+        "delete": {
+          "title": "Sucesso",
+          "message": "Uma coleção foi excluída"
+        }
+      },
+      "collection": {
+        "delete": {
+          "title": "Sucesso",
+          "message": "Um item foi removido da lista"
+        }
+      }
+    },
+    "app": {
+      "board_error": "Não foi possível criar a coleção",
+      "account_error": "Falha ao excluir a conta. Por favor, tente novamente",
+      "delete_account": {
+        "title": "Conta excluída",
+        "message": "Sua conta e todos os dados associados foram removidos permanentemente."
+      }
+    }
+  },
+
+  "sign_in": {
+    "header": "Entrar no ",
+    "action": "Entrar",
+    "google": "Continuar com o Google",
+    "redirect": {
+      "label": "Não tem uma conta? ",
+      "to": "Cadastre-se"
+    }
+  },
+  "sign_up": {
+    "header": "Cadastrar no ",
+    "action": "Cadastrar",
+    "redirect": {
+      "label": "Já tem uma conta? ",
+      "to": "Entrar"
+    }
+  },
+
+  "home": {
+    "greetings": "Olá ",
+    "boards": "Coleções",
+    "empty": {
+      "title": "Hmm, parece que está vazio",
+      "label": "Adicione novas coleções na seção abaixo!"
+    },
+    "new_item": "Crie uma nova coleção aqui...",
+    "board_completed": "Concluído!",
+
+    "summary": {
+      "0": {
+        "title": "Vamos começar!",
+        "message": "Você está no caminho certo! Comece a concluir suas listas e veja seu progresso crescer."
+      },
+      "15": {
+        "title": "Progredindo!",
+        "message": "Você completou {{percent}} das suas listas. Continue assim e não pare!"
+      },
+      "30": {
+        "title": "Indo bem!",
+        "message": "Você chegou a {{percent}} das suas listas. Está progredindo de forma constante, continue!"
+      },
+      "50": {
+        "title": "Metade do caminho!",
+        "message": "Parabéns! Você completou {{percent}} das suas listas. Está na metade, continue avançando!"
+      },
+      "75": {
+        "title": "Quase lá!",
+        "message": "Ótimo trabalho! Você completou {{percent}} das suas listas. A linha de chegada está próxima, continue forte!"
+      },
+      "90": {
+        "title": "Reta final!",
+        "message": "Você está quase lá! Com {{percent}} das suas listas concluídas, a linha de chegada está à vista. Continue assim!"
+      },
+      "100": {
+        "title": "Parabéns!",
+        "message": "Você conseguiu! Completou 100% das suas listas. Que conquista! Reserve um momento para celebrar seu sucesso!"
+      }
+    }
+  },
+  "collection": {
+    "empty": {
+      "title": "Ops! Nada para ver aqui",
+      "label": "Adicione novos itens tocando ou falando!"
+    },
+    "new_item": "Adicionar novos itens...",
+    "recording": "Ouvindo sua voz..."
+  },
+  "settings": {
+    "nav": {
+      "language": "Idioma",
+      "rate": "Avaliar o aplicativo",
+      "delete": "Excluir conta",
+      "log_out": "Sair"
+    }
+  },
+
+  "account": {
+    "offboarding": {
+      "delete": {
+        "title": ["Tem certeza que deseja ", "excluir", " sua conta?"],
+        "access_data": "Você perderá o acesso à sua conta e não poderá fazer login novamente.",
+        "stored_data": "Todas as suas informações serão excluídas permanentemente.",
+        "shared_data": "Qualquer lista que você criou e compartilhou com outras pessoas também será excluída.",
+        "warning": "Entendo que minha conta e todos os dados associados serão excluídos permanentemente.",
+        "password": "Para continuar, insira sua senha na seção abaixo",
+        "placeholder": "Digite sua senha"
+      },
+      "feedback": {
+        "title": "Sentiremos sua falta!",
+        "description": "Adoraríamos saber por que você está saindo. Seu feedback nos ajudará a melhorar.",
+        "reasons": [
+          "Encontrei uma alternativa melhor",
+          "Não preciso mais do serviço",
+          "Problemas com a experiência do usuário",
+          "Preocupações com privacidade",
+          "Outro"
+        ],
+        "placeholder": "Por favor, compartilhe seus pensamentos conosco."
+      },
+      "cancel": "Cancelar",
+      "confirm": "Excluir conta"
+    }
+  }
+}

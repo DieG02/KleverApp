@@ -36,10 +36,11 @@ export default function Home({ navigation }: HomeProps) {
     <Layout>
       <KeyboardAvoidingView
         style={styles.wrapper}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
         <View style={styles.header}>
-          <Heading type='Semibold' size={18}>
-            <Text>{t('home.grettings')}</Text>
+          <Heading type="Semibold" size={18}>
+            <Text>{t('home.greetings')}</Text>
             <Text style={styles.hightlight}>{user?.display_name || ''}</Text>
           </Heading>
           <TouchableOpacity onPress={handleRedirect}>
@@ -54,7 +55,7 @@ export default function Home({ navigation }: HomeProps) {
         <Spacing size={20} />
 
         <View style={styles.container}>
-          <Heading type='Medium' size={12}>
+          <Heading type="Medium" size={12}>
             {t('home.boards')}
           </Heading>
           <Spacing size={20} />

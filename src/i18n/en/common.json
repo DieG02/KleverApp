@@ -24,7 +24,9 @@
       "label": "Select language",
       "options": {
         "en": "English",
-        "es": "Spanish"
+        "es": "Spanish",
+        "it": "Italian",
+        "pt": "Portuguese"
       }
     }
   },
@@ -112,7 +114,7 @@
   },
 
   "home": {
-    "grettings": "Hello ",
+    "greetings": "Hello ",
     "boards": "Collections",
     "empty": {
       "title": "Hmm, looks like it's empty",

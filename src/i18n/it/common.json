@@ -1,0 +1,201 @@
+{
+  "app": {
+    "name": "Klever",
+    "settings": "Impostazioni"
+  },
+  "forms": {
+    "auth": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Inserisci la tua email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Inserisci la tua password"
+      },
+      "confirm": {
+        "label": "Conferma password",
+        "placeholder": "Conferma la tua password"
+      }
+    }
+  },
+  "modals": {
+    "locale": {
+      "label": "Seleziona lingua",
+      "options": {
+        "en": "Inglese",
+        "es": "Spagnolo",
+        "it": "Italiano",
+        "pt": "Portoghese"
+      }
+    }
+  },
+  "toast": {
+    "auth": {
+      "password": {
+        "PASSWORD_TOO_SHORT": "La password deve contenere almeno 8 caratteri",
+        "PASSWORDS_DO_NOT_MATCH": "Le password inserite non coincidono",
+        "UNKNOWN_ERROR": "Qualcosa è andato storto"
+      },
+      "email": {
+        "auth/email-already-in-use": "Questo indirizzo email è già in uso",
+        "auth/invalid-email": "Questo indirizzo email non è valido",
+        "auth/invalid-credential": "Credenziali non valide, riprova",
+        "auth/network-request-failed": "Controlla la tua connessione di rete",
+        "DEFAULT": "Qualcosa è andato storto"
+      },
+      "google": {
+        "SIGN_IN_CANCELLED": "Il processo di accesso è stato annullato",
+        "IN_PROGRESS": "Un altro processo è in corso",
+        "PLAY_SERVICES_NOT_AVAILABLE": "I servizi Play non sono disponibili",
+        "DEFAULT": "Qualcosa è andato storto, controlla la tua connessione di rete"
+      },
+      "error": {
+        "SIGN_UP": {
+          "title": "Registrazione fallita",
+          "description": "Controlla email e password, poi riprova."
+        },
+        "LOG_OUT": {
+          "title": "Disconnessione fallita",
+          "description": "Riprova; se il problema persiste, riavvia l'app."
+        },
+        "SIGN_IN": {
+          "title": "Accesso fallito",
+          "description": "Controlla le credenziali, poi riprova."
+        }
+      }
+    },
+    "user": {
+      "locale": {
+        "update": {
+          "title": "Operazione riuscita",
+          "message": "La lingua dell'app è stata aggiornata"
+        }
+      },
+      "board": {
+        "delete": {
+          "title": "Operazione riuscita",
+          "message": "Una raccolta è stata eliminata"
+        }
+      },
+      "collection": {
+        "delete": {
+          "title": "Operazione riuscita",
+          "message": "Un elemento è stato rimosso dalla lista"
+        }
+      }
+    },
+    "app": {
+      "board_error": "Impossibile creare la raccolta",
+      "account_error": "Eliminazione dell'account fallita. Riprova",
+      "delete_account": {
+        "title": "Account eliminato",
+        "message": "Il tuo account e tutti i dati associati sono stati rimossi definitivamente."
+      }
+    }
+  },
+
+  "sign_in": {
+    "header": "Accedi a ",
+    "action": "Accedi",
+    "google": "Continua con Google",
+    "redirect": {
+      "label": "Non hai un account? ",
+      "to": "Registrati"
+    }
+  },
+  "sign_up": {
+    "header": "Registrati su ",
+    "action": "Registrati",
+    "redirect": {
+      "label": "Hai già un account? ",
+      "to": "Accedi"
+    }
+  },
+
+  "home": {
+    "greetings": "Ciao ",
+    "boards": "Raccolte",
+    "empty": {
+      "title": "Hmm, sembra vuoto",
+      "label": "Aggiungi nuove raccolte nella sezione qui sotto!"
+    },
+    "new_item": "Crea una nuova raccolta qui...",
+    "board_completed": "Completato!",
+
+    "summary": {
+      "0": {
+        "title": "Iniziamo!",
+        "message": "Sei partito alla grande! Inizia a completare le tue liste e guarda i tuoi progressi crescere."
+      },
+      "15": {
+        "title": "Stai progredendo!",
+        "message": "Hai completato il {{percent}} delle tue liste. Mantieni lo slancio e continua!"
+      },
+      "30": {
+        "title": "Buon ritmo!",
+        "message": "Hai raggiunto il {{percent}} delle tue liste. Stai progredendo con costanza, continua così!"
+      },
+      "50": {
+        "title": "A metà strada!",
+        "message": "Congratulazioni! Hai completato il {{percent}} delle tue liste. Sei a metà, vai avanti!"
+      },
+      "75": {
+        "title": "Quasi alla fine!",
+        "message": "Ottimo lavoro! Hai completato il {{percent}} delle tue liste. Sei quasi al traguardo, continua con energia!"
+      },
+      "90": {
+        "title": "Rettilineo finale!",
+        "message": "Ci sei quasi! Con il {{percent}} delle tue liste completate, il traguardo è in vista. Continua così!"
+      },
+      "100": {
+        "title": "Congratulazioni!",
+        "message": "Ce l'hai fatta! Hai completato il 100% delle tue liste. Che risultato! Prenditi un momento per festeggiare il tuo successo!"
+      }
+    }
+  },
+  "collection": {
+    "empty": {
+      "title": "Ops! Niente da vedere qui",
+      "label": "Aggiungi nuovi elementi toccando o parlando!"
+    },
+    "new_item": "Aggiungi nuovi elementi...",
+    "recording": "In ascolto della tua voce..."
+  },
+  "settings": {
+    "nav": {
+      "language": "Lingua",
+      "rate": "Valuta l'app",
+      "delete": "Elimina account",
+      "log_out": "Esci"
+    }
+  },
+
+  "account": {
+    "offboarding": {
+      "delete": {
+        "title": ["Sei sicuro di voler ", "eliminare", " il tuo account?"],
+        "access_data": "Perderai l'accesso al tuo account e non potrai più effettuare il login.",
+        "stored_data": "Tutte le tue informazioni verranno eliminate definitivamente.",
+        "shared_data": "Anche tutte le liste che hai creato e condiviso con altri verranno eliminate.",
+        "warning": "Ho capito che il mio account e tutti i dati associati verranno eliminati definitivamente.",
+        "password": "Per continuare, inserisci la tua password nella sezione qui sotto",
+        "placeholder": "Inserisci la tua password"
+      },
+      "feedback": {
+        "title": "Ci dispiace vederti andare!",
+        "description": "Ci piacerebbe sapere perché te ne vai. Il tuo feedback ci aiuterà a migliorare.",
+        "reasons": [
+          "Ho trovato un'alternativa migliore",
+          "Non ho più bisogno del servizio",
+          "Problemi con l'esperienza utente",
+          "Preoccupazioni sulla privacy",
+          "Altro"
+        ],
+        "placeholder": "Per favore prenditi un momento per condividere i tuoi pensieri con noi."
+      },
+      "cancel": "Annulla",
+      "confirm": "Elimina account"
+    }
+  }
+}
